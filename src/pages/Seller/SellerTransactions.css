@@ -1,0 +1,49 @@
+.seller-transactions-container {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.seller-transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.seller-transactions-table th,
+.seller-transactions-table td {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.proof-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.proof-link:hover {
+  text-decoration: underline;
+}
+
+.no-proof {
+  color: #999;
+  font-style: italic;
+}
+
+.mark-received-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mark-received-btn:hover {
+  background-color: #218838;
+}
+
+.received-badge {
+  color: green;
+  font-weight: bold;
+}

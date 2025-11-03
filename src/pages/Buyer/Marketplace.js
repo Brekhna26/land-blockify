@@ -1,0 +1,124 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import {
+  FaMapMarkerAlt, FaUser, FaHome,
+  FaRulerCombined, FaCalendarAlt, FaFileAlt
+} from 'react-icons/fa';
+import './Marketplace.css';
+
+export default function Marketplace() {
+  const [properties, setProperties] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const buyerEmail = localStorage.getItem('email'); // ✅ Get logged-in buyer's email
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/marketplace/approved-lands")
+      .then(res => setProperties(res.data))
+      .catch(err => console.error("❌ Error fetching properties:", err));
+  }, []);
+
+  const filteredProperties = properties.filter((prop) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      prop.location?.toLowerCase().includes(term) ||
+      prop.ownerName?.toLowerCase().includes(term) ||
+      prop.propertyType?.toLowerCase().includes(term)
+    );
+  });
+
+  const handleBuyRequest = () => {
+    axios.post('http://localhost:3001/api/transactions/request', {
+      propertyId: selectedProperty.propertyId,
+      buyerEmail: buyerEmail,
+      sellerEmail: selectedProperty.ownerName
+    })
+    .then(() => alert("✅ Purchase request sent to seller"))
+    .catch(() => alert("❌ Failed to send purchase request"));
+  };
+
+  // ======= SINGLE PROPERTY FULL-VIEW =======
+  if (selectedProperty) {
+    return (
+      <div className="land-marketplace">
+        <button className="back-btn" onClick={() => setSelectedProperty(null)}>← Back to Marketplace</button>
+        <div className="property-full-detail">
+          <img
+            src={`http://localhost:3001${selectedProperty.documentPath}`}
+            alt="property"
+            className="property-full-img"
+          />
+          <div className="property-full-content">
+            <h2>Property ID: {selectedProperty.propertyId}</h2>
+            <p><FaMapMarkerAlt /> <strong>Location:</strong> {selectedProperty.location}</p>
+            <p><FaUser /> <strong>Owner:</strong> {selectedProperty.ownerName}</p>
+            <p><FaHome /> <strong>Type:</strong> {selectedProperty.propertyType}</p>
+            <p><FaRulerCombined /> <strong>Area:</strong> {selectedProperty.landArea}</p>
+            <p><FaCalendarAlt /> <strong>Registered:</strong> {new Date(selectedProperty.created_at).toLocaleDateString()}</p>
+            <p><FaCalendarAlt /> <strong>Status:</strong> <span className="badge">Approved</span></p>
+            <p><strong>Legal Description:</strong><br /> {selectedProperty.legalDescription || 'N/A'}</p>
+            <a
+              href={`http://localhost:3001${selectedProperty.documentPath}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="view-doc-link"
+            >
+              <FaFileAlt /> View Uploaded Document
+            </a>
+
+            {/* ✅ REQUEST TO BUY BUTTON */}
+            <button
+              className="request-buy-btn"
+              onClick={handleBuyRequest}
+            >
+              📩 Request to Buy
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ======= MAIN LISTING VIEW =======
+  return (
+    <div className="land-marketplace">
+      <div className="header">
+        <h1>Marketplace</h1>
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search by location, owner or type..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button>Filters</button>
+        </div>
+      </div>
+
+      {filteredProperties.length === 0 ? (
+        <p>No matching lands found.</p>
+      ) : (
+        <div className="property-list">
+          {filteredProperties.map((prop) => (
+            <div key={prop.id} className="property-card">
+              <img src={`http://localhost:3001${prop.documentPath}`} alt="property" />
+              <div className="card-content">
+                <h3>Property ID: {prop.propertyId}</h3>
+                <p><FaMapMarkerAlt /> {prop.location}</p>
+                <p><FaUser /> <strong>Owner:</strong> {prop.ownerName}</p>
+                <p><FaHome /> <strong>Type:</strong> {prop.propertyType}</p>
+                <p><FaRulerCombined /> <strong>Area:</strong> {prop.landArea}</p>
+                <p><FaCalendarAlt /> <strong>Registered:</strong> {new Date(prop.created_at).toLocaleDateString()}</p>
+                <p><FaCalendarAlt /> <strong>Status:</strong> <span className="badge">Approved</span></p>
+              </div>
+              <button className="details-btn" onClick={() => setSelectedProperty(prop)}>
+                View Details
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

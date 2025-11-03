@@ -1,0 +1,524 @@
+.blockchain-management {
+  padding: 20px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Wallet Connection Required */
+.wallet-connection-required {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.connection-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.wallet-icon {
+  font-size: 4rem;
+  color: #3b82f6;
+  margin-bottom: 20px;
+}
+
+.connection-card h2 {
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.connection-card p {
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.wallet-component {
+  margin: 30px 0;
+}
+
+.info-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fef3c7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.info-note svg {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.info-note p {
+  margin: 0;
+  color: #92400e;
+  font-size: 14px;
+}
+
+/* Header */
+.blockchain-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+.header-info h2 {
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.header-info p {
+  color: #6b7280;
+  margin: 0;
+}
+
+.connected-wallet {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ecfdf5;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #065f46;
+  font-weight: 500;
+}
+
+.connected-wallet svg {
+  color: #10b981;
+}
+
+/* Tabs */
+.blockchain-tabs {
+  display: flex;
+  gap: 5px;
+  background: white;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.tab-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Content */
+.blockchain-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Overview */
+.blockchain-overview {
+  padding: 25px;
+}
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.overview-card {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.overview-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.overview-card .card-icon {
+  font-size: 1.5rem;
+}
+
+.overview-card .card-icon.success { color: #10b981; }
+.overview-card .card-icon.primary { color: #3b82f6; }
+.overview-card .card-icon.warning { color: #f59e0b; }
+.overview-card .card-icon.info { color: #8b5cf6; }
+
+.overview-card h3 {
+  margin: 0;
+  color: #374151;
+  font-size: 16px;
+}
+
+.card-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 5px;
+}
+
+.overview-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Contract Info */
+.contract-info {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 25px;
+}
+
+.contract-info h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #374151;
+  margin-bottom: 20px;
+}
+
+.contract-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contract-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.contract-item strong {
+  min-width: 200px;
+  color: #374151;
+}
+
+.contract-item code {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.view-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.view-btn:hover {
+  background: #2563eb;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 25px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #374151;
+  margin: 0;
+}
+
+.refresh-btn {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #374151;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  background: #e5e7eb;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Pending Approvals */
+.pending-approvals {
+  min-height: 400px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.empty-state svg {
+  font-size: 3rem;
+  color: #10b981;
+  margin-bottom: 15px;
+}
+
+/* Properties Table */
+.properties-table {
+  padding: 0 25px 25px;
+  overflow-x: auto;
+}
+
+.properties-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.properties-table th,
+.properties-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.properties-table th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.properties-table td {
+  color: #6b7280;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.registered {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.action-btn.register {
+  background: #3b82f6;
+  color: white;
+}
+
+.action-btn.register:hover {
+  background: #2563eb;
+}
+
+.action-btn.approve {
+  background: #10b981;
+  color: white;
+}
+
+.action-btn.approve:hover {
+  background: #059669;
+}
+
+.action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Blockchain Logs */
+.blockchain-logs {
+  min-height: 400px;
+}
+
+.logs-container {
+  padding: 0 25px 25px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.log-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #fafafa;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.log-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #374151;
+}
+
+.log-type svg.success {
+  color: #10b981;
+}
+
+.log-type svg.error {
+  color: #ef4444;
+}
+
+.log-time {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.log-details {
+  padding: 15px;
+}
+
+.log-details p {
+  margin: 8px 0;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.log-details strong {
+  color: #374151;
+  min-width: 120px;
+}
+
+.log-details code {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blockchain-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .blockchain-tabs {
+    flex-direction: column;
+  }
+  
+  .overview-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .contract-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .properties-table {
+    font-size: 14px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}

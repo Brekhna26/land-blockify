@@ -1,0 +1,174 @@
+.land-marketplace {
+  background: rgb(243, 246, 247);
+  min-height: 100vh;
+  padding: 20px 40px;
+ font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+   
+}
+
+.header h1 {
+  color:rgb(22, 112, 22);
+ 
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 200px;
+}
+
+.search-bar button {
+  background: #f2f2ce;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #3c763d;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.property-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.property-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.card-content h3 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.card-content p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.details-btn {
+  background: #dda52b;
+  border: none;
+  border-top: 1px solid #eee;
+  padding: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #f8faf9;
+  border-radius: 0 0 12px 12px;
+  transition: background 0.2s ease;
+}
+
+.details-btn:hover {
+  background: #256e49;
+  color: #fcfffd;
+
+}
+.back-btn {
+  margin: 10px 0;
+  background: #dddddd;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+.property-full-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.property-full-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.property-full-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.property-full-content p {
+  margin: 10px 0;
+}
+
+.view-doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+  text-decoration: none;
+}
+.land-marketplace {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.badge.Approved {
+  background-color: green;
+}
+
+.badge.Rejected {
+  background-color: red;
+}
+

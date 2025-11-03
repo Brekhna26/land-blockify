@@ -1,0 +1,134 @@
+.transaction-log-container {
+ font-family: Arial, Helvetica, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.transaction-log-container h1 {
+ font-size: 30px;
+  margin-bottom: 8px;
+  color:rgb(22, 112, 22);
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+ 
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f5f5f5;
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 2px solid #ddd; 
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom:none;
+  vertical-align: middle;
+}
+tr {
+  border-bottom: 1px solid #ddd; /* Har row ke neeche straight line */
+}
+
+.status-cell {
+  border-bottom: none !important;
+}
+
+.status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon svg {
+  vertical-align: middle;
+}
+
+.status-pending {
+  color: #FFA500;
+}
+
+.status-approved {
+  color: #00AA00;
+}
+
+.status-projects {
+  color: #1E90FF;
+}
+
+.status-rejected {
+  color: #FF0000;
+}
+
+.details-button {
+  background-color: transparent;
+  border: 1px solid #216d38;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #17571c;
+  transition: all 0.2s;
+}
+
+.details-button:hover {
+  background-color: #c97f10;
+  color: #eaf0eb;
+  border-color: #f3eeee;
+}
+
+.footer-note {
+  font-size: 14px;
+  color: #7a7272;
+  margin-top: 16px;
+  font-style: italic;
+  justify-content: center;
+}
+.status-section {
+  border-bottom: none !important; 
+  text-decoration: none !important; 
+}
+
+.status-item {
+  border-bottom: none;
+  text-decoration: none;
+}
+/* Remove all underlines from status items */
+
+.status-label {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+
+.icon-class {
+  margin-right: 15px; 
+}

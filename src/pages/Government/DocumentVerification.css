@@ -1,0 +1,107 @@
+.document-verification {
+  padding: 20px;
+  background-color: #fdfdee;
+}
+
+/* Wallet Section */
+.wallet-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f0f8ff;
+  border: 1px solid #b0d4f1;
+  border-radius: 8px;
+}
+
+.warning-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  margin: 15px 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.doc-table th, .doc-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.doc-table th {
+  background-color: #e4f7e4;
+  color: #2d7a2d;
+}
+
+.approve-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.approve-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.approve-btn.disabled {
+  background-color: #ffa726;
+  cursor: not-allowed;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: #da190b;
+  transform: translateY(-1px);
+}
+
+.reject-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.verify-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.no-data {
+  color: #888;
+  margin-top: 20px;
+}

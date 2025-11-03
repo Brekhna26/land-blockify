@@ -1,0 +1,41 @@
+.register-land-container {
+  padding: 2rem;
+  background: #fdfdf5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.land-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.land-form label {
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  color: #333;
+}
+
+.land-form input,
+.land-form select,
+.land-form textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.land-form button {
+  padding: 0.8rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.land-form button:hover {
+  background-color: #218838;
+}

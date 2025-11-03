@@ -1,0 +1,7 @@
+{
+  "network": "mumbai",
+  "chainId": 80001,
+  "deployedAt": "2025-01-07T01:20:00.000Z",
+  "LandRegistry": "0x7f9dda378bbebb99038be1bd7830663d5d90ba47",
+  "PropertyTransfer": "0x76ff87120de0ddcdb09fac0052de6ee6da383012"
+}

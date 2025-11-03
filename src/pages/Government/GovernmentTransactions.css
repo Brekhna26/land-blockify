@@ -1,0 +1,358 @@
+.government-transactions {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.transactions-header {
+  margin-bottom: 2rem;
+}
+
+.transactions-header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.transactions-header p {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+/* Filter Section */
+.filter-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-section label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.filter-section select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e6ed;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-section select:hover {
+  border-color: #3498db;
+}
+
+.filter-section select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* No Data */
+.no-data {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  color: #7f8c8d;
+}
+
+.no-data p {
+  font-size: 1.1rem;
+}
+
+/* Transactions Container */
+.transactions-container {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* Table Styles */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.transactions-table th {
+  padding: 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.transactions-table tbody tr {
+  border-bottom: 1px solid #e0e6ed;
+  transition: all 0.3s ease;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.transactions-table td {
+  padding: 1.25rem;
+  font-size: 0.95rem;
+}
+
+/* Status Row Colors */
+.transaction-row.status-accepted {
+  border-left: 4px solid #f39c12;
+}
+
+.transaction-row.status-government-approved {
+  border-left: 4px solid #3498db;
+}
+
+.transaction-row.status-completed {
+  border-left: 4px solid #27ae60;
+}
+
+.transaction-row.status-rejected {
+  border-left: 4px solid #e74c3c;
+}
+
+/* Cell Styles */
+.property-id {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.email {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.location {
+  color: #34495e;
+}
+
+.area {
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.type {
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.status {
+  text-align: center;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.badge-accepted {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.badge-government-approved {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.badge-completed {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.badge-rejected {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.badge-info {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.badge-success {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.badge-danger {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #f8d7da;
+  color: #842029;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Actions Column */
+.actions {
+  text-align: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-approve {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-approve:hover:not(:disabled) {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-reject {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-reject:hover:not(:disabled) {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Summary Stats */
+.transactions-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-label {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .transactions-table {
+    font-size: 0.85rem;
+  }
+
+  .transactions-table th,
+  .transactions-table td {
+    padding: 0.75rem;
+  }
+
+  .btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .government-transactions {
+    padding: 1rem;
+  }
+
+  .transactions-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transactions-table {
+    font-size: 0.75rem;
+  }
+
+  .transactions-table th,
+  .transactions-table td {
+    padding: 0.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .transactions-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
