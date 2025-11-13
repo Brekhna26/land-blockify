@@ -234,11 +234,58 @@ smartcontract/
 3. **Contract Not Found**: Ensure contracts are deployed and addresses are correct
 4. **Transaction Reverted**: Check contract requirements and input validation
 
+### Specific Error: "execution reverted (no data present; likely require(false) occurred)"
+
+This error typically occurs when:
+
+1. **Not Authorized Authority**: Your wallet address is not in the `authorizedAuthorities` mapping
+   - **Solution**: The app will automatically add you as an authority on first attempt
+   - **Manual Fix**: Call `addAuthority(your_wallet_address)` function
+
+2. **Property Already Registered**: The property identifier already exists in the contract
+   - **Solution**: Use a unique property identifier
+
+3. **Invalid Parameters**: Empty strings or invalid values passed to contract
+   - **Solution**: Ensure all required fields are filled and valid
+
+### Quick Fix Steps
+
+1. **Check Environment Variables**:
+   ```bash
+   # Make sure your .env file has correct contract addresses
+   REACT_APP_LAND_REGISTRY_ADDRESS=0x7f9dda378bbebb99038be1bd7830663d5d90ba47
+   REACT_APP_PROPERTY_TRANSFER_ADDRESS=0x76ff87120de0ddcdb09fac0052de6ee6da383012
+   ```
+
+2. **Verify Network Connection**:
+   - Connect to Polygon Mumbai testnet (Chain ID: 80001)
+   - OR Polygon Amoy testnet (Chain ID: 80002)
+
+3. **Check Authority Status**:
+   - The app will automatically check and add your wallet as an authority
+   - First transaction may fail, but second attempt should work
+
+4. **Reset and Retry**:
+   ```bash
+   # Clear browser cache and localStorage
+   # Refresh the page and reconnect wallet
+   ```
+
+### Debug Steps
+
+1. Open browser console (F12)
+2. Look for debug logs starting with:
+   - `📝 Debug handleVerify:`
+   - `🔍 Checking authority status...`
+   - `📋 Authority status:`
+3. Check transaction details on [PolygonScan](https://mumbai.polygonscan.com/)
+
 ### Getting Help
 
 - Check the [Hardhat documentation](https://hardhat.org/docs)
 - Visit [Polygon documentation](https://docs.polygon.technology/)
 - Review [OpenZeppelin contracts](https://docs.openzeppelin.com/contracts/)
+- Check console logs for specific error details
 
 ## 📝 License
 

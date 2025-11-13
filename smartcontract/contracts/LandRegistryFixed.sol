@@ -2,14 +2,14 @@
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+// Removed ReentrancyGuard to test if it's causing the issue
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
- * @title LandRegistry
- * @dev Smart contract for land ownership registration and verification
+ * @title LandRegistryFixed
+ * @dev Smart contract for land ownership registration and verification (without reentrancy guard)
  */
-contract LandRegistry is Ownable, ReentrancyGuard {
+contract LandRegistryFixed is Ownable {
     using Counters for Counters.Counter;
 
     // Counter for property IDs
@@ -129,7 +129,7 @@ contract LandRegistry is Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev Register a new land property
+     * @dev Register a new land property (without nonReentrant modifier)
      * @param _propertyIdentifier External property identifier from database
      * @param _ownerName Name of the actual property owner
      * @param _location Property location
@@ -146,7 +146,7 @@ contract LandRegistry is Ownable, ReentrancyGuard {
         string memory _propertyType,
         string memory _legalDescription,
         string memory _documentHash
-    ) external onlyAuthorizedAuthority nonReentrant returns (uint256) {
+    ) external onlyAuthorizedAuthority returns (uint256) { // Removed nonReentrant modifier
         require(bytes(_ownerName).length > 0, "Owner name required");
         require(
             bytes(_propertyIdentifier).length > 0,
@@ -211,50 +211,6 @@ contract LandRegistry is Ownable, ReentrancyGuard {
         properties[_propertyId].approvedBy = msg.sender;
 
         emit PropertyApproved(_propertyId, msg.sender, block.timestamp);
-    }
-
-    /**
-     * @dev Transfer property ownership (change owner name)
-     * @param _propertyId Property ID to transfer
-     * @param _newOwnerName New owner name
-     */
-    function transferProperty(
-        uint256 _propertyId,
-        string memory _newOwnerName
-    )
-        external
-        propertyExists(_propertyId)
-        onlyPropertyGovt(_propertyId)
-        nonReentrant
-    {
-        require(bytes(_newOwnerName).length > 0, "New owner name required");
-        require(
-            keccak256(bytes(properties[_propertyId].ownerName)) !=
-                keccak256(bytes(_newOwnerName)),
-            "Cannot transfer to same owner"
-        );
-        require(
-            properties[_propertyId].isApproved,
-            "Property must be approved for transfer"
-        );
-
-        string memory previousOwnerName = properties[_propertyId].ownerName;
-
-        // Remove from previous owner name's list
-        _removePropertyFromOwnerName(previousOwnerName, _propertyId);
-
-        // Update property owner name
-        properties[_propertyId].ownerName = _newOwnerName;
-
-        // Add to new owner name's list
-        ownerNameProperties[_newOwnerName].push(_propertyId);
-
-        emit PropertyTransferred(
-            _propertyId,
-            address(0),
-            address(0),
-            block.timestamp
-        );
     }
 
     /**
@@ -348,43 +304,5 @@ contract LandRegistry is Ownable, ReentrancyGuard {
         address _owner
     ) external view propertyExists(_propertyId) returns (bool) {
         return properties[_propertyId].govt == _owner;
-    }
-
-    /**
-     * @dev Internal function to remove property from owner name's list
-     * @param _ownerName Owner name
-     * @param _propertyId Property ID to remove
-     */
-    function _removePropertyFromOwnerName(
-        string memory _ownerName,
-        uint256 _propertyId
-    ) internal {
-        uint256[] storage ownerProps = ownerNameProperties[_ownerName];
-        for (uint256 i = 0; i < ownerProps.length; i++) {
-            if (ownerProps[i] == _propertyId) {
-                ownerProps[i] = ownerProps[ownerProps.length - 1];
-                ownerProps.pop();
-                break;
-            }
-        }
-    }
-
-    /**
-     * @dev Internal function to remove property from government's list
-     * @param _govt Government address
-     * @param _propertyId Property ID to remove
-     */
-    function _removePropertyFromGovt(
-        address _govt,
-        uint256 _propertyId
-    ) internal {
-        uint256[] storage govtProps = govtProperties[_govt];
-        for (uint256 i = 0; i < govtProps.length; i++) {
-            if (govtProps[i] == _propertyId) {
-                govtProps[i] = govtProps[govtProps.length - 1];
-                govtProps.pop();
-                break;
-            }
-        }
     }
 }

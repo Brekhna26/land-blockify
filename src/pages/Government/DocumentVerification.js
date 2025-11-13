@@ -12,28 +12,21 @@ const DocumentVerification = () => {
   const [processingId, setProcessingId] = useState(null);
 
   useEffect(() => {
-    const fetchPendingLands = async () => {
-      try {
-        const res = await axios.get("http://localhost:3001/api/gov/get-pending-lands");
-        setPendingLands(res.data);
-        setLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch lands:", err);
-        setLoading(false);
-      }
-    };
     fetchPendingLands();
   }, []);
 
+  const fetchPendingLands = async () => {
+    try {
+      const res = await axios.get("http://localhost:3001/api/gov/get-pending-lands");
+      setPendingLands(res.data);
+    } catch (err) {
+      console.error("Failed to fetch lands:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleVerify = async (id) => {
-    console.log('📝 Debug handleVerify:');
-    console.log('- walletConnected (local state):', walletConnected);
-    console.log('- walletAddress (local state):', walletAddress);
-    
-    const web3Service = getWeb3Service();
-    console.log('- web3Service.account:', web3Service.account);
-    console.log('- web3Service.signer:', web3Service.signer);
-    
     if (!walletConnected) {
       alert('Please connect your MetaMask wallet first!');
       return;
@@ -41,54 +34,55 @@ const DocumentVerification = () => {
 
     setProcessingId(id);
     try {
-      // Find the property details
       const property = pendingLands.find(land => land.id === id);
       if (!property) {
         alert('Property not found!');
-        setProcessingId(null);
         return;
       }
 
-      // Prepare and validate blockchain parameters
+      const web3Service = getWeb3Service();
+      
+      // Check authority and add if needed
+      const authorityCheck = await web3Service.checkAuthority(walletAddress);
+      if (!authorityCheck.success || !authorityCheck.isAuthorized) {
+        const addAuthorityResult = await web3Service.addSelfAsAuthority();
+        if (!addAuthorityResult.success) {
+          throw new Error('Failed to add authority: ' + addAuthorityResult.error);
+        }
+        alert('✅ Added as authorized authority! Please click the approve button again to register the property.');
+        return;
+      }
+
+      // Prepare blockchain parameters
       const blockchainParams = {
-        propertyIdentifier: property.propertyId || property.id.toString(),
-        ownerName: property.ownerName || 'Unknown Owner', // Actual property owner name
+        propertyIdentifier: property.propertyId || `PROP-${property.id}-${Date.now()}`, // Use original propertyId or generate fallback
+        ownerName: property.ownerName || 'Unknown Owner',
         location: property.location || 'Unknown Location',
-        landArea: parseInt(property.landArea) || 1000, // Default to 1000 sq m if invalid
+        landArea: parseInt(property.landArea) || 1000,
         propertyType: property.propertyType || 'Residential',
         legalDescription: property.legalDescription || `Property at ${property.location}`,
         documentHash: property.documentHash || '0x0000000000000000000000000000000000000000000000000000000000000000'
       };
       
-      console.log('📝 Blockchain parameters:', blockchainParams);
-      console.log('🔗 Registering property on blockchain first...');
-      
-      // STEP 1: Register on blockchain FIRST
+      // Register on blockchain
       const blockchainTx = await registerProperty(blockchainParams);
-
-      console.log('✅ Blockchain transaction successful:', blockchainTx);
       
-      // Check if blockchain transaction was successful
       if (!blockchainTx || !blockchainTx.success) {
-        throw new Error('Blockchain transaction failed');
+        throw new Error('Blockchain transaction failed: ' + (blockchainTx.error || 'Unknown error'));
       }
       
-      // STEP 2: Only approve in database AFTER blockchain success
-      console.log('💾 Approving in database...');
+      // Approve in database after blockchain success
       await axios.post(`http://localhost:3001/api/gov/approve-land/${id}`);
       
-      // STEP 3: Update the property in database with blockchain transaction hash
-      await axios.post('http://localhost:3001/api/blockchain/register-property', {
-        propertyId: property.id,
-        transactionHash: blockchainTx.transactionHash,
-        blockchainId: blockchainTx.propertyId
-      });
+      // Note: The blockchain registration is already complete
+      // The backend could be updated to store the transaction hash and blockchain ID
+      // For now, the property is approved in the database and registered on blockchain
 
-      alert(`✅ Property approved and registered on blockchain!\nTransaction: ${blockchainTx.transactionHash}`);
+      alert(`✅ Property approved and registered on blockchain!\nTransaction: ${blockchainTx.transactionHash}\nBlockchain ID: ${blockchainTx.propertyId}`);
       setPendingLands(prev => prev.filter(l => l.id !== id));
     } catch (error) {
       console.error('❌ Error approving property:', error);
-      alert(`❌ Failed to approve property!\n\nError: ${error.message}\n\nThe property was NOT approved in the database because the blockchain transaction failed.`);
+      alert(`❌ Failed to approve property!\n\nError: ${error.message}`);
     } finally {
       setProcessingId(null);
     }
@@ -113,26 +107,15 @@ const DocumentVerification = () => {
       {/* Wallet Connection */}
       <div className="wallet-section">
         <Web3Wallet 
-          onWalletConnect={async (address) => {
-            console.log('🔗 Wallet connected in DocumentVerification:', address);
+          onWalletConnect={(address) => {
             setWalletConnected(true);
             setWalletAddress(address);
-            
-            // Ensure Web3Service is also connected
-            const web3Service = getWeb3Service();
-            if (!web3Service.account) {
-              console.log('🔄 Connecting Web3Service...');
-              await connectWallet();
-            }
+            connectWallet();
           }}
           onWalletDisconnect={() => {
-            console.log('🔓 Wallet disconnected in DocumentVerification');
             setWalletConnected(false);
             setWalletAddress('');
-            
-            // Disconnect Web3Service as well
-            const web3Service = getWeb3Service();
-            web3Service.disconnect();
+            getWeb3Service().disconnect();
           }}
         />
       </div>

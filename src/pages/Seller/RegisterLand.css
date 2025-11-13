@@ -39,3 +39,18 @@
 .land-form button:hover {
   background-color: #218838;
 }
+
+/* Auto-generated ID field styling */
+.auto-generated-id {
+  background-color: #f8f9fa;
+  border-color: #6c757d;
+  color: #495057;
+  font-family: 'Courier New', monospace;
+}
+
+.id-hint {
+  color: #6c757d;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-style: italic;
+}

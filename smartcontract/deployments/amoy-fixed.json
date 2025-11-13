@@ -1,0 +1,12 @@
+{
+  "network": "amoy",
+  "chainId": 80002,
+  "deployedAt": "2025-11-13T20:12:17.694Z",
+  "deployer": "0x9251a13c698E95f84F014eD179d4cFb5eDdF944f",
+  "contracts": {
+    "LandRegistryFixed": {
+      "address": "0x7b2Bde3D41130D56D2BDe89b8c0B23c220AD9544",
+      "transactionHash": "0x40fb4252602282d80d04c74bfe8e61d554d00ddf48ac417b09d091c921c84a9c"
+    }
+  }
+}

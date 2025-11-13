@@ -10,7 +10,7 @@ import "./LandRegistry.sol";
  * @title PropertyTransfer
  * @dev Smart contract for handling property sale transactions
  */
-contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
+contract PropertyTransfer is Ownable(), ReentrancyGuard {
     using Counters for Counters.Counter;
 
     // Counter for transaction IDs
@@ -34,6 +34,7 @@ contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
         uint256 propertyId;
         address seller;
         address buyer;
+        string buyerName; // Name of the buyer for property transfer
         uint256 price; // Price in wei
         uint256 createdTimestamp;
         uint256 completedTimestamp;
@@ -154,6 +155,7 @@ contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
     function createTransaction(
         uint256 _propertyId,
         address _buyer,
+        string memory _buyerName,
         uint256 _price,
         string memory _terms
     ) external nonReentrant returns (uint256) {
@@ -186,6 +188,7 @@ contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
             propertyId: _propertyId,
             seller: msg.sender,
             buyer: _buyer,
+            buyerName: _buyerName,
             price: _price,
             createdTimestamp: block.timestamp,
             completedTimestamp: 0,
@@ -261,7 +264,7 @@ contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
         require(!txn.escrowReleased, "Escrow already released");
 
         // Transfer property ownership in LandRegistry
-        landRegistry.transferProperty(txn.propertyId, txn.buyer);
+        landRegistry.transferProperty(txn.propertyId, txn.buyerName);
 
         // Release escrow to seller
         uint256 escrowAmount = escrowBalance[_transactionId];
@@ -378,7 +381,7 @@ contract PropertyTransfer is Ownable(msg.sender), ReentrancyGuard {
             require(success, "Failed to refund buyer");
         } else {
             // Pay seller and transfer property
-            landRegistry.transferProperty(txn.propertyId, txn.buyer);
+            landRegistry.transferProperty(txn.propertyId, txn.buyerName);
             txn.status = TransactionStatus.Completed;
             txn.completedTimestamp = block.timestamp;
 

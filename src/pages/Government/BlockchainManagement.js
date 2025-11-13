@@ -51,10 +51,9 @@ const BlockchainManagement = () => {
 
   const checkWalletConnection = async () => {
     try {
-      const connected = await web3Service.isWalletConnected();
-      if (connected) {
-        const accounts = await web3Service.getAccounts();
-        setWalletAddress(accounts[0]);
+      const currentAccount = await web3Service.getCurrentAccount();
+      if (currentAccount) {
+        setWalletAddress(currentAccount);
         setIsWalletConnected(true);
       }
     } catch (error) {
@@ -92,7 +91,7 @@ const BlockchainManagement = () => {
 
   const loadPendingProperties = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/gov/pending-approvals');
+      const response = await axios.get('http://localhost:3001/api/gov/get-pending-lands');
       setPendingProperties(response.data || []);
       
       setStats(prev => ({
@@ -212,7 +211,7 @@ const BlockchainManagement = () => {
   };
 
   const formatAddress = (address) => {
-    if (!address) return 'N/A';
+    if (!address || typeof address !== 'string') return 'N/A';
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
 

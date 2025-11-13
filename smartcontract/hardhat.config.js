@@ -18,21 +18,21 @@ module.exports = {
   networks: {
     amoy: {
       url: process.env.POLYGON_AMOY_RPC || "https://rpc-amoy.polygon.technology/",
-      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY.length === 66 ? [process.env.PRIVATE_KEY] : [],
+      accounts: process.env.PRIVATE_KEY && (process.env.PRIVATE_KEY.length === 64 || process.env.PRIVATE_KEY.length === 66) ? [process.env.PRIVATE_KEY] : [],
       chainId: 80002,
-      gasPrice: 20000000000, // 20 gwei
+      gasPrice: 30000000000, // 30 gwei
     },
     mumbai: {
-      url: process.env.POLYGON_MUMBAI_RPC || "https://polygon-mumbai.g.alchemy.com/v2/demo",
-      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY.length === 66 ? [process.env.PRIVATE_KEY] : [],
+      url: process.env.POLYGON_MUMBAI_RPC || "https://rpc-mumbai.maticvigil.com",
+      accounts: process.env.PRIVATE_KEY && (process.env.PRIVATE_KEY.length === 64 || process.env.PRIVATE_KEY.length === 66) ? [process.env.PRIVATE_KEY] : [],
       chainId: 80001,
-      gasPrice: 20000000000, // 20 gwei
+      gasPrice: 30000000000, // 30 gwei
     },
     polygon: {
       url: process.env.POLYGON_MAINNET_RPC || "https://polygon-rpc.com",
-      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY.length === 66 ? [process.env.PRIVATE_KEY] : [],
+      accounts: process.env.PRIVATE_KEY && (process.env.PRIVATE_KEY.length === 64 || process.env.PRIVATE_KEY.length === 66) ? [process.env.PRIVATE_KEY] : [],
       chainId: 137,
-      gasPrice: 20000000000,
+      gasPrice: 30000000000,
     },
   },
   etherscan: {

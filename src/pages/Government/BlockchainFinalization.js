@@ -66,7 +66,12 @@ export default function BlockchainFinalization() {
       console.log('📝 Blockchain parameters:', blockchainParams);
 
       // Create blockchain transaction
-      const blockchainTx = await createTransaction(blockchainParams);
+      const blockchainTx = await createTransaction(
+        transaction.propertyId,
+        walletAddress, // Use connected wallet as buyer address
+        blockchainParams.price,
+        blockchainParams.terms
+      );
 
       console.log('✅ Blockchain transaction result:', blockchainTx);
 
@@ -123,7 +128,7 @@ export default function BlockchainFinalization() {
           onWalletConnect={async (address) => {
             console.log('🔗 Wallet connected:', address);
             setWalletConnected(true);
-            setWalletAddress(address);
+            setWalletAddress(typeof address === 'string' ? address : address?.address || '');
           }}
           onWalletDisconnect={() => {
             console.log('🔓 Wallet disconnected');

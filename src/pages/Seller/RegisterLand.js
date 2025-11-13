@@ -4,7 +4,7 @@ import "./RegisterLand.css";
 
 const RegisterLand = () => {
   const [formData, setFormData] = useState({
-    propertyId: "",
+    propertyId: `PROP-${Date.now()}`,
     ownerName: "",
     location: "",
     landArea: "",
@@ -14,16 +14,21 @@ const RegisterLand = () => {
   });
 
   useEffect(() => {
-  const email = localStorage.getItem("email") || "Unknown";
-  setFormData(prev => ({ ...prev, ownerName: email }));
-}, []);
+    const email = localStorage.getItem("email") || "Unknown";
+    setFormData(prev => ({ 
+      ...prev, 
+      ownerName: email,
+      propertyId: `PROP-${Date.now()}` // Generate new ID on component mount
+    }));
+  }, []);
 
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "document") {
       setFormData({ ...formData, document: files[0] });
-    } else {
+    } else if (name !== "propertyId") {
+      // Don't allow manual changes to propertyId
       setFormData({ ...formData, [name]: value });
     }
   };
@@ -46,9 +51,9 @@ const handleSubmit = async (e) => {
     const data = await res.json();
     if (res.ok) {
       alert("Land Registered Successfully!");
-      // Optional: Clear form
+      // Optional: Clear form (but generate new property ID)
       setFormData({
-        propertyId: "",
+        propertyId: `PROP-${Date.now()}`,
         ownerName: formData.ownerName,
         location: "",
         landArea: "",
@@ -73,7 +78,14 @@ const handleSubmit = async (e) => {
       <form onSubmit={handleSubmit} className="land-form">
         <label>
           Property ID:
-          <input type="text" name="propertyId" value={formData.propertyId} onChange={handleChange} required />
+          <input 
+            type="text" 
+            name="propertyId" 
+            value={formData.propertyId} 
+            readOnly 
+            className="auto-generated-id"
+          />
+          <small className="id-hint">Auto-generated unique ID</small>
         </label>
 
         <label>

@@ -12,6 +12,14 @@ const Web3Wallet = ({ onWalletConnect, onWalletDisconnect }) => {
   useEffect(() => {
     initializeWeb3();
     setupEventListeners();
+    
+    // Cleanup event listeners on unmount
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum.removeListener('chainChanged', handleChainChanged);
+      }
+    };
   }, []);
 
   const initializeWeb3 = async () => {
@@ -36,8 +44,6 @@ const Web3Wallet = ({ onWalletConnect, onWalletDisconnect }) => {
   };
 
   const setupEventListeners = () => {
-    web3Service.setupEventListeners();
-    
     // Listen for account changes
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', handleAccountsChanged);
